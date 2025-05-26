@@ -1,16 +1,14 @@
-📡 IRremoteEsp32
+# 📡 IRremoteEsp32
 Lightweight ESP32 IR remote library for capturing and sending raw pulse width data.
 
 ⚠️ This library uses PWM channel 0 of the ESP32.
 
 Receive and send raw IR signals (pulse width) for devices like TVs, air conditioners, and possibly other IR-controlled electronics.
 
-🔧 Configuration
+# 🔧 Configuration
 Edit the definitions in IRRemote.h to match your hardware setup:
 
-cpp
-Copiar
-Editar
+```cpp
 #define IR_RECEIVER_PIN       5     // IR receiver pin
 #define IR_TRANSMITTER_PIN    4     // IR LED transmitter pin
 #define PULSE_WIDTH_VECTOR_SIZE 500 // Max size of pulse width array
@@ -20,24 +18,25 @@ Editar
 #define PWM_CHANNEL          0
 #define PWM_FREQ         38000
 #define PWM_RESOLUTION       8
-🚀 Getting Started
-1️⃣ Create an object
-cpp
-Copiar
-Editar
+```
+
+# 🚀 Getting Started
+
+## 1️⃣ Create an object
+```cpp
 IRCode IRcode;
-2️⃣ Setup in setup()
-cpp
-Copiar
-Editar
+```
+
+## 2️⃣ Setup in setup()
+```cpp
 void setup() {
   Serial.begin(115200);
   IRcode.begin();
 }
-3️⃣ Receive IR code easily
-cpp
-Copiar
-Editar
+```
+
+## 3️⃣ Receive IR code easily
+```cpp
 IRcode.IRrecStart();
 Serial.print("Waiting code:");
 for (int i = 0; i < 10; i++) {
@@ -46,31 +45,27 @@ for (int i = 0; i < 10; i++) {
 }
 IRcode.IRrecStop();
 Serial.println("Acquisition end.");
-4️⃣ Print received data
-cpp
-Copiar
-Editar
+```
+
+## 4️⃣ Print received data
+```cpp
 IRcode.printPulseWidthVector();         // Print as durations
 IRcode.printPulseWidthVectorinBinary(); // Print as binary signal
+```
 💡 Ensure Serial.begin(115200); is called in setup().
 
-5️⃣ Send the IR code
-cpp
-Copiar
-Editar
+## 5️⃣ Send the IR code
+```cpp
 IRcode.IRsendRaw();
-📊 Accessing raw data
+```
+## 📊 Accessing raw data
 The pulse widths (in microseconds) are stored in the array:
-
-cpp
-Copiar
-Editar
+```cpp
 IRcode.pulseWidthVector[]; // type: int
+```
+
 📁 Example structure
 For a basic usage example, see the folder:
-
-swift
-Copiar
-Editar
+```swift
 examples/IRremoteDemo/IRremoteDemo.ino
-  
+```
